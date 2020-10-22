@@ -19,6 +19,10 @@ RUN curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubunt
 
 FROM ubuntu:xenial-20200916
 
+RUN apt-get update && \
+  apt-get install awscli && \
+  apt-get clean
+
 # copy over packer
 COPY --from=packer-build /usr/bin/packer /usr/bin/packer
 COPY --from=packer-build /usr/share/doc/packer /usr/share/doc/packer
